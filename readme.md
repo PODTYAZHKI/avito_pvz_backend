@@ -24,7 +24,7 @@
 
 1. Клонировать репозиторий:
 ```bash
-git clone hhttps://github.com/PODTYAZHKI/avito_pvz_backend && cd avito_pvz_backend
+git clone https://github.com/PODTYAZHKI/avito_pvz_backend && cd avito_pvz_backend
 ```
 2. Запустить сервис:
 
