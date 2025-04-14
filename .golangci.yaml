@@ -1,0 +1,23 @@
+version: "1"
+
+linters:
+  enable:
+    - bidichk
+    - bodyclose
+    - decorder
+    - dupl
+    - errname 
+    - funlen
+    - godot
+    - misspell
+    - nestif
+    - predeclared
+    - usestdlibvars
+    - whitespace
+  disable:
+    - errcheck
+
+
+run:
+  timeout: 1m
+  tests: false

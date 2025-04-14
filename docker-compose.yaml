@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: pvz-service
+    ports:
+      - "8080:8080"
+    environment:
+      ENV: local
+      DB_CONNECT_RETRIES: "10"
+      DB_CONNECT_DELAY: "2"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - internal
+    
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres-pvz
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: pvz
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "sh -c 'pg_isready -U postgres -d pvz'" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - internal
+
+volumes:
+  pg_data:
+networks:
+  internal:
